@@ -14,10 +14,18 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 
+import play.mvc.*;
+import views.html.*;
+
 public class Application extends Controller
 {
-    public static String modelToString()
-    {
-		return null;
-    }
+	
+	public static Result index() {
+	    return ok(index.render("swag"));
+		//return ok("Hello world");
+	}
+	
+	public static Result test() {
+		return ok(views.html.test.render("Yolo", "Test"));
+	}
 }

@@ -29,7 +29,7 @@ public class MailProcess
     }
 
 
-    private static ProcessModel createProcessModel() throws Exception
+    public static ProcessModel createProcessModel() throws Exception
     {
         // create the process
         ProcessModel pm = new ProcessModel();

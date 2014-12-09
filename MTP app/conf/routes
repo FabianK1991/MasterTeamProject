@@ -2,40 +2,11 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-#GET	/                           controllers.Application.index()
-#GET		/all						controllers.Application.getAll()
-#DELETE 	/all						controllers.Application.deleteAll()
-
+GET		/			controllers.Application.index()
+GET 	/test		controllers.Application.test()
 
 # process
-#POST	/process/create				controllers.Process.createProcess()
-#PUT		/process/update				controllers.Process.updateProcess()
 #DELETE	/process/delete/:id			controllers.Process.deleteProcess(id : String)
 
-#GET		/process/get/:id			controllers.Process.getProcess(id : String)
-#GET		/process/get_by_keywords	controllers.Process.getProcessIDsKeyword()
-#GET		/process/get_by_bo			controllers.Process.getProcessIDsBO()
-
-
-# process instance
-#POST	/process_instance/create			controllers.ProcessInstance.createProcessInstance()
-#PUT		/process_instance/update			controllers.ProcessInstance.updateProcessInstance()
-#DELETE	/process_instance/delete/:id		controllers.ProcessInstance.deleteProcessInstance(id : String)
-
-#GET		/process_instance/get/:id			controllers.ProcessInstance.getProcessInstance(id : String)
-#GET		/process_instance/get_by_boi		controllers.ProcessInstance.getProcessInstancesIDsBO()
-#GET		/process_instance/get_by_pid/:pid	controllers.ProcessInstance.getProcessInstanceIDs(pid : String)
-
-
-# business object
-#DELETE	/business_object/delete/:id			controllers.BusinessObject.deleteBusinessObject(id : String)
-
-#GET		/business_object/get_by_pid/:id		controllers.BusinessObject.getBusinessObjectsPID(id : String)
-#GET		/business_object/get_by_keywords	controllers.BusinessObject.getBusinessObjects()
-#GET		/business_object/get/:id			controllers.BusinessObject.getBusinessObject(id : String)
-
-
-
-
 # Map static resources from the /public folder to the /assets URL path
-#GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
