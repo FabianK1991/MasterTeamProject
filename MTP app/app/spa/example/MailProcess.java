@@ -28,7 +28,6 @@ public class MailProcess
         pi.saveInstanceToFile("files/mail_process_instance.ttl");
     }
 
-
     public static ProcessModel createProcessModel() throws Exception
     {
         // create the process
