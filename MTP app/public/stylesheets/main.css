@@ -1,0 +1,39 @@
+/* Main css file */
+
+#ProcessModelBorder{
+	border: 1px solid grey;
+	border-radius: 5px;
+	
+	overflow: auto;
+	width: 600px;
+	height: 150px;	
+	padding: 20px;
+}
+
+.flowObject{
+	color: black;
+	font-size: 11px;
+	position: absolute;
+	padding: 5px; 
+}
+
+.Activity{
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+.Gateway{
+	border: 1px solid black;
+}
+
+.Event{
+	margin-top: -5px;
+	border: 1px solid black;
+	border-radius: 100px;
+	padding: 10px;
+}
+
+.Selected{
+	background-color: black;
+	color: white;
+}

@@ -26,6 +26,6 @@ public class Application extends Controller
 	}
 	
 	public static Result test() {
-		return ok(views.html.test.render("Yolo", "Test"));
+		return ok(views.html.test.render(mtp.ModelEngine.generateBusinessProcessView(mtp.Offline.getMailProcessModel()), "Test"));
 	}
 }

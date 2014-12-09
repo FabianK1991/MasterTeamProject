@@ -1,14 +1,27 @@
-@(message: String, title: String)
+@(ProcessModel: String, title: String)
 
 <!DOCTYPE html>
 <html>
     <head>
         <title>@title</title>		
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/arrows.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+        	/*window.onload = function(){
+        		var cArrow = $cArrows('#CommonParent').arrow('#A1', '#A2');
+        	}*/
+        </script>
     </head>
     <body>
-        @message
+	    <div id="ProcessModelBorder">
+	    	<div id="ProcessModelContainer">
+	    		@Html(ProcessModel)
+	    	</div>
+	    </div>
+    	
+    	
     </body>
 </html>
