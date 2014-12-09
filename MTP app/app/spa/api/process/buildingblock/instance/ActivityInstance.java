@@ -1,4 +1,4 @@
-package api.process.buildingblock.instance;
+package spa.api.process.buildingblock.instance;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -8,8 +8,8 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-import api.ProcessInstance;
-import api.process.buildingblock.Node;
+import spa.api.ProcessInstance;
+import spa.api.process.buildingblock.Node;
 
 
 public class ActivityInstance

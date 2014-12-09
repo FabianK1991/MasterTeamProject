@@ -1,10 +1,10 @@
-package api.process.buildingblock;
+package spa.api.process.buildingblock;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import api.ProcessModel;
+import spa.api.ProcessModel;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;

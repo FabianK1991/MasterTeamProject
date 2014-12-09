@@ -1,16 +1,16 @@
-package example;
+package spa.example;
 
-import api.ProcessInstance;
-import api.ProcessModel;
-import api.process.buildingblock.Activity;
-import api.process.buildingblock.BusinessObject;
-import api.process.buildingblock.Event;
-import api.process.buildingblock.Event.EventType;
-import api.process.buildingblock.Flow;
-import api.process.buildingblock.Gateway;
-import api.process.buildingblock.Gateway.GatewayType;
-import api.process.buildingblock.instance.ActivityInstance;
-import api.process.buildingblock.instance.BusinessObjectInstance;
+import spa.api.ProcessInstance;
+import spa.api.ProcessModel;
+import spa.api.process.buildingblock.Activity;
+import spa.api.process.buildingblock.BusinessObject;
+import spa.api.process.buildingblock.Event;
+import spa.api.process.buildingblock.Event.EventType;
+import spa.api.process.buildingblock.Flow;
+import spa.api.process.buildingblock.Gateway;
+import spa.api.process.buildingblock.Gateway.GatewayType;
+import spa.api.process.buildingblock.instance.ActivityInstance;
+import spa.api.process.buildingblock.instance.BusinessObjectInstance;
 
 
 public class MailProcess

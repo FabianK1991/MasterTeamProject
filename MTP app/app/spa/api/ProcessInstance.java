@@ -1,4 +1,4 @@
-package api;
+package spa.api;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import api.process.buildingblock.Node;
-import api.process.buildingblock.instance.ActivityInstance;
-import api.process.buildingblock.instance.BusinessObjectInstance;
+import spa.api.process.buildingblock.Node;
+import spa.api.process.buildingblock.instance.ActivityInstance;
+import spa.api.process.buildingblock.instance.BusinessObjectInstance;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -171,7 +171,7 @@ public class ProcessInstance
 
     public static ProcessInstance getProcessInstance(ProcessModel processModel, String id) throws Exception
     {
-        return rdfToModel(rest.entities.ProcessInstance.getProcessInstance(id), processModel);
+        return rdfToModel(spa.rest.entities.ProcessInstance.getProcessInstance(id), processModel);
     }
 
 
@@ -189,7 +189,7 @@ public class ProcessInstance
         Model model = ModelFactory.createDefaultModel();
         model.read(new FileInputStream(file), null, "TURTLE");
 
-        rest.entities.ProcessInstance.createProcessInstance(model);
+        spa.rest.entities.ProcessInstance.createProcessInstance(model);
 
         return rdfToModel(model, null);
     }
@@ -197,25 +197,25 @@ public class ProcessInstance
 
     public String store() throws Exception
     {
-        return rest.entities.ProcessInstance.createProcessInstance(modelToRDF(this));
+        return spa.rest.entities.ProcessInstance.createProcessInstance(modelToRDF(this));
     }
 
 
     public String update() throws Exception
     {
-        return rest.entities.ProcessInstance.updateProcessInstance(modelToRDF(this));
+        return spa.rest.entities.ProcessInstance.updateProcessInstance(modelToRDF(this));
     }
 
 
     public boolean delete() throws Exception
     {
-        return rest.entities.ProcessInstance.deleteProcessInstance(id);
+        return spa.rest.entities.ProcessInstance.deleteProcessInstance(id);
     }
 
 
     public static boolean delete(String id) throws Exception
     {
-        return rest.entities.ProcessInstance.deleteProcessInstance(id);
+        return spa.rest.entities.ProcessInstance.deleteProcessInstance(id);
     }
 
 

@@ -1,8 +1,8 @@
-package api.process.buildingblock;
+package spa.api.process.buildingblock;
 
 import java.util.Random;
 
-import api.ProcessModel;
+import spa.api.ProcessModel;
 
 
 public class Flow

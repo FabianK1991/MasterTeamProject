@@ -1,6 +1,6 @@
-package api.process.buildingblock;
+package spa.api.process.buildingblock;
 
-import api.ProcessModel;
+import spa.api.ProcessModel;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

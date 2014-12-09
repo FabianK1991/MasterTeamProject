@@ -1,8 +1,8 @@
-package rest.entities;
+package spa.rest.entities;
 
 import java.util.Set;
 
-import rest.RestController;
+import spa.rest.RestController;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

@@ -1,7 +1,7 @@
-package example;
+package spa.example;
 
-import api.ProcessInstance;
-import api.ProcessModel;
+import spa.api.ProcessInstance;
+import spa.api.ProcessModel;
 
 
 public class MailProcess_Repo_Interaction

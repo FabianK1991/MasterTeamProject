@@ -1,4 +1,4 @@
-package api;
+package spa.api;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,14 +11,14 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import api.process.buildingblock.Activity;
-import api.process.buildingblock.BusinessObject;
-import api.process.buildingblock.Event;
-import api.process.buildingblock.Event.EventType;
-import api.process.buildingblock.Flow;
-import api.process.buildingblock.Gateway;
-import api.process.buildingblock.Gateway.GatewayType;
-import api.process.buildingblock.Node;
+import spa.api.process.buildingblock.Activity;
+import spa.api.process.buildingblock.BusinessObject;
+import spa.api.process.buildingblock.Event;
+import spa.api.process.buildingblock.Event.EventType;
+import spa.api.process.buildingblock.Flow;
+import spa.api.process.buildingblock.Gateway;
+import spa.api.process.buildingblock.Gateway.GatewayType;
+import spa.api.process.buildingblock.Node;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -182,35 +182,35 @@ public class ProcessModel
 
     public String store() throws Exception
     {
-        return rest.entities.Process.createProcess(modelToRDF(this));
+        return spa.rest.entities.Process.createProcess(modelToRDF(this));
     }
 
 
     public String update() throws Exception
     {
-        return rest.entities.Process.updateProcess(modelToRDF(this));
+        return spa.rest.entities.Process.updateProcess(modelToRDF(this));
     }
 
 
     public boolean delete() throws Exception
     {
-        return rest.entities.Process.deleteProcess(this.getId());
+        return spa.rest.entities.Process.deleteProcess(this.getId());
     }
 
 
     public static boolean delete(String id) throws Exception
     {
-        return rest.entities.Process.deleteProcess(id);
+        return spa.rest.entities.Process.deleteProcess(id);
     }
 
 
     public static List<ProcessModel> getAllProcesses() throws Exception
     {
-        Set<String> ids = rest.entities.Process.getProcessIDsKeyword(new HashSet<String>());
+        Set<String> ids = spa.rest.entities.Process.getProcessIDsKeyword(new HashSet<String>());
         List<ProcessModel> processes = new ArrayList<ProcessModel>();
 
         for(String id : ids) {
-            processes.add(rdfToModel(rest.entities.Process.getProcess(id)));
+            processes.add(rdfToModel(spa.rest.entities.Process.getProcess(id)));
         }
 
         return processes;
@@ -219,18 +219,18 @@ public class ProcessModel
 
     public static ProcessModel getProcess(String id) throws Exception
     {
-        return rdfToModel(rest.entities.Process.getProcess(id));
+        return rdfToModel(spa.rest.entities.Process.getProcess(id));
     }
 
 
     public static List<ProcessModel> searchByKeywords(Set<String> keywords) throws Exception
     {
-        Set<String> ids = rest.entities.Process.getProcessIDsKeyword(keywords);
+        Set<String> ids = spa.rest.entities.Process.getProcessIDsKeyword(keywords);
 
         List<ProcessModel> processes = new ArrayList<ProcessModel>();
 
         for(String id : ids) {
-            processes.add(rdfToModel(rest.entities.Process.getProcess(id)));
+            processes.add(rdfToModel(spa.rest.entities.Process.getProcess(id)));
         }
 
         return processes;
@@ -239,12 +239,12 @@ public class ProcessModel
 
     public static List<ProcessModel> searchByBusinessObjects(Set<String> boURIs) throws Exception
     {
-        Set<String> ids = rest.entities.Process.getProcessIDsBO(boURIs);
+        Set<String> ids = spa.rest.entities.Process.getProcessIDsBO(boURIs);
 
         List<ProcessModel> processes = new ArrayList<ProcessModel>();
 
         for(String id : ids) {
-            processes.add(rdfToModel(rest.entities.Process.getProcess(id)));
+            processes.add(rdfToModel(spa.rest.entities.Process.getProcess(id)));
         }
 
         return processes;
@@ -265,7 +265,7 @@ public class ProcessModel
         Model model = ModelFactory.createDefaultModel();
         model.read(new FileInputStream(file), null, "TURTLE");
 
-        rest.entities.Process.createProcess(model);
+        spa.rest.entities.Process.createProcess(model);
 
         return rdfToModel(model);
     }
@@ -492,7 +492,7 @@ public class ProcessModel
 
     public Set<ProcessInstance> getAllInstances() throws Exception
     {
-        Set<String> piURI = rest.entities.ProcessInstance.getProcessInstanceIDsPID(id);
+        Set<String> piURI = spa.rest.entities.ProcessInstance.getProcessInstanceIDsPID(id);
         Set<ProcessInstance> pis = new HashSet<ProcessInstance>();
         for(String piId : piURI) {
             pis.add(ProcessInstance.getProcessInstance(this, piId));

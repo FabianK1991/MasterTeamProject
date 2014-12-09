@@ -1,8 +1,8 @@
-package api.process.buildingblock;
+package spa.api.process.buildingblock;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
-import api.ProcessModel;
+import spa.api.ProcessModel;
 
 
 public class Activity extends Node

@@ -1,13 +1,13 @@
-package api;
+package spa.api;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import api.process.buildingblock.Activity;
-import api.process.buildingblock.BusinessObject;
-import api.process.buildingblock.Node;
-import api.process.buildingblock.instance.ActivityInstance;
+import spa.api.process.buildingblock.Activity;
+import spa.api.process.buildingblock.BusinessObject;
+import spa.api.process.buildingblock.Node;
+import spa.api.process.buildingblock.instance.ActivityInstance;
 
 
 public class SmartProcessController
