@@ -1,4 +1,4 @@
-@(title: String, processName: String)
+@(title: String, processName: String, processId: String)
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
     </head>
     <body>
 	    <div>
-	    	Congrats you finished: @processName !
+	    	Congrats you finished: @processName ! <a href="/test?action=create&process=@processId">Restart</a>
 	    </div>
     </body>
 </html>

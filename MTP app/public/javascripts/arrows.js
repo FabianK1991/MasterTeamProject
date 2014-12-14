@@ -12,7 +12,7 @@
         // default options
 		this.options = {
 		    base: {
-		        canvasZIndex: -10,
+		        canvasZIndex: 10,
 		        alertErrors: true,
 		        putToContainer: true
 		        // + : canvasClass, canvasId    n.r.: ~lazy = false

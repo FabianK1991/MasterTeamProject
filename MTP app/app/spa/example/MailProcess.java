@@ -1,5 +1,8 @@
 package spa.example;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import spa.api.ProcessInstance;
 import spa.api.ProcessModel;
 import spa.api.process.buildingblock.Activity;
@@ -53,6 +56,15 @@ public class MailProcess
         Activity scan = new Activity(pm);
         scan.setId(nsm + "scan");
         scan.setName("Scan Mail");
+        
+        Set<BusinessObject> as = new HashSet<BusinessObject>();
+        BusinessObject myBO = new BusinessObject(pm);
+        myBO.setId(nsm + "BO1");
+        myBO.setName("Sales Order");
+        
+        as.add(myBO);
+        
+        scan.setBusinessObjects(as);
 
         Gateway xor = new Gateway(pm, GatewayType.XOR);
         xor.setId(nsm + "spam_xor");

@@ -1,15 +1,19 @@
 package mtp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import play.twirl.api.Html;
+
 import com.hp.hpl.jena.rdf.model.Model;
 
 import spa.api.ProcessModel;
 import spa.api.process.buildingblock.Activity;
+import spa.api.process.buildingblock.BusinessObject;
 import spa.api.process.buildingblock.Flow;
 import spa.api.process.buildingblock.Node;
 
@@ -102,13 +106,40 @@ public class ModelEngine {
 	 		
 	 		return null;
 	 	}
+	 	
+	 	public static Html generateCompleteView(ProcessModel pm, Node currentStep){
+	 		// Process View
+	 		String ProcessView = mtp.ModelEngine.generateBusinessProcessView(pm, currentStep);
+	 		
+	 		// Work Area
+			Html workArea = Mapping.getWorkAreaViewByNode(pm.getId(), currentStep.getId());
+			
+			// Related Documents / BO's
+			String relatedDocumentsView = generateRelatedDocumentsView(currentStep);
+	 		
+	 		return views.html.test.render(ProcessView, pm.getName() + " - " + currentStep.getName(), workArea, relatedDocumentsView);
+	 	}
+	 	
+	 	public static String generateRelatedDocumentsView(Node currentStep){
+	 		String output = "";
+	 		
+	 		Iterator<BusinessObject> iterator = currentStep.getBusinessObjects().iterator();
+			
+	        while(iterator.hasNext()) {
+	        	BusinessObject bo = iterator.next();
+	        	
+	        	output += "<div>ID: " + bo.getId() + "</div><div>NAME: " + bo.getName() + "</div>";
+	        }
+	 		
+	 		return output;
+	 	}
 
 		public static String generateBusinessProcessView(ProcessModel pm, Node currentStep){
 			Node startNode = ModelEngine.getStartNode(pm);
 			
 			if( startNode != null ){
 				String out = "";
-				String scriptString = "var cArrow = $cArrows('#ProcessModelContainer')";
+				String scriptString = "var cArrow = $cArrows('#ProcessModelContainer', { render: { strokeStyle: '#000000', lineWidth: 2 } })";
 				
 				// Let's go!
 				List<NodeWrapper> workingNodes = new ArrayList<NodeWrapper>();
@@ -140,17 +171,30 @@ public class ModelEngine {
 					
 					// add successor nodes
 					int amount = 0;
+					List<String> successorNodes = new ArrayList<String>();
+					
 					Iterator<Flow> iterator = currentNode.getNextFlows().iterator();
 			        while(iterator.hasNext()) {
 			        	Flow f = iterator.next();
 			        	Node suc = f.getTo();
 			        	
-			        	scriptString += ".arrow('#Act_" + getCuttedID(currentNode.getId()) + "', '#Act_" + getCuttedID(suc.getId()) + "')";
+			        	successorNodes.add(suc.getId());
+			        	
+			        	
+			        }
+			        
+			        // Sort because sometimes the order is wrong
+			        Collections.sort(successorNodes);
+			        
+			        for(int i=0;i<successorNodes.size();i++){
+			        	String suc = successorNodes.get(i);
+			        	
+			        	scriptString += ".arrow('#Act_" + getCuttedID(currentNode.getId()) + "', '#Act_" + getCuttedID(suc) + "')";
 			        	
 		        		// Only add if not already worked on
-			        	if( !addedIds.contains(getCuttedID(suc.getId())) ){
+			        	if( !addedIds.contains(getCuttedID(suc)) ){
 			        		nw = new NodeWrapper();
-							nw.n = suc;
+							nw.n = ModelEngine.getNodeById(suc, pm);
 							nw.left = currentNodeWrapper.left + 100;
 							nw.top = currentNodeWrapper.top + (amount * 40);
 			        		workingNodes.add(nw);

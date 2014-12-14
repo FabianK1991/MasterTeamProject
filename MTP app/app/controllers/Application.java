@@ -42,13 +42,11 @@ public class Application extends Controller
 			
 			session("step", startNode.getId());
 			
-			String ProcessView = mtp.ModelEngine.generateBusinessProcessView(pm, startNode);
-			Html workArea = views.html.defaultView.render();
-			
-			return ok(views.html.test.render(ProcessView, pm.getName() + " - " + startNode.getName(), workArea));
+			return ok(ModelEngine.generateCompleteView(pm, startNode));
 		}
 		// Assume we go a step ahead
 		else if( session("process") != null ){
+			// Store Process Instance
 			//Cache.get(session.getId() + "-messages", ProcessInstance.class);
 			//Cache.set(session.getId() + "-messages", new ProcessInstance(pm));
 			
@@ -57,20 +55,16 @@ public class Application extends Controller
 			
 			// End reached
 			if( currentStep == null ){
-				return ok(views.html.end.render(pm.getName() + " - Finished!", pm.getName()));
+				return ok(views.html.end.render(pm.getName() + " - Finished!", pm.getName(), pm.getId()));
 			}
 			
 			// Update session variable
 			session("step", currentStep.getId());
 			
-			// Render
-			String ProcessView = mtp.ModelEngine.generateBusinessProcessView(pm, currentStep);
-			Html workArea = Mapping.getWorkAreaViewByNode(pm.getId(), currentStep.getId());
-			
-			return ok(views.html.test.render(ProcessView, pm.getName() + " - " + currentStep.getName(), workArea));
+			return ok(ModelEngine.generateCompleteView(pm, currentStep));
 		}
 		
 		// Render example process
-		return ok(views.html.test.render(mtp.ModelEngine.generateBusinessProcessView(mtp.Offline.getMailProcessModel(), null), action, views.html.defaultView.render()));
+		return ok(ModelEngine.generateCompleteView(mtp.Offline.getMailProcessModel(), ModelEngine.getNextActivity(ModelEngine.getStartNode(mtp.Offline.getMailProcessModel()))));
 	}
 }
