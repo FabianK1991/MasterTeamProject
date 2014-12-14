@@ -1,1 +1,1 @@
-activator run
+activator ~run

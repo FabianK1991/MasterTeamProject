@@ -1,0 +1,16 @@
+@(title: String, processName: String)
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@title</title>		
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery.js")" type="text/javascript"></script>
+    </head>
+    <body>
+	    <div>
+	    	Congrats you finished: @processName !
+	    </div>
+    </body>
+</html>

@@ -3,7 +3,7 @@
 # ~~~~
 
 GET		/			controllers.Application.index()
-GET 	/test		controllers.Application.test()
+GET 	/test		controllers.Application.test
 
 # process
 #DELETE	/process/delete/:id			controllers.Process.deleteProcess(id : String)

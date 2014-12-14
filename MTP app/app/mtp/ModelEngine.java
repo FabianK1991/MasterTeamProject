@@ -9,6 +9,7 @@ import java.util.Map;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import spa.api.ProcessModel;
+import spa.api.process.buildingblock.Activity;
 import spa.api.process.buildingblock.Flow;
 import spa.api.process.buildingblock.Node;
 
@@ -17,12 +18,11 @@ public class ModelEngine {
 		// test method
 	 	public static void main(String[] args) throws Exception
 	    {
-	 		ModelEngine.generateBusinessProcessView(Offline.getMailProcessModel());
+	 		//ModelEngine.generateBusinessProcessView(Offline.getMailProcessModel());
+	 		System.out.println(Offline.getMailProcessModel().getId());
 	    }
 	 	
-	 	
-	 	
-	 	private static Node getStartNode(ProcessModel pm){
+	 	public static Node getStartNode(ProcessModel pm){
 	 		Map<String, Integer> m = new HashMap<String, Integer>();
 	 		
 	 		// check which node has no predecessor
@@ -66,8 +66,44 @@ public class ModelEngine {
 	 			return id;
 	 		}
 	 	}
+	 	
+	 	public static Node getNextActivity(Node currentNode){
+	 		List<Node> workingNodes = new ArrayList<Node>();
+	 		workingNodes.add(currentNode);
+	 		
+	 		while( workingNodes.size() > 0 ){
+	 			Iterator<Flow> iterator2 = workingNodes.get(0).getNextFlows().iterator();
+	 			workingNodes.remove(0);
+				
+		        while(iterator2.hasNext()) {
+		        	Flow f = iterator2.next();
+		        	
+		        	if( f.getTo() instanceof Activity ){
+		        		return f.getTo();
+		        	}
+		        	else{
+		        		workingNodes.add(f.getTo());
+		        	}
+		        }
+	 		}
+	 		
+	 		return null;
+	 	}
+	 	
+	 	public static Node getNodeById(String id, ProcessModel pm){
+	 		Iterator<Node> iterator = pm.getNodes().iterator();
+		    while(iterator.hasNext()) {
+		        Node n = iterator.next();
+		        
+		        if( n.getId().equals(id) ){
+		        	return n;
+		        }
+		    }
+	 		
+	 		return null;
+	 	}
 
-		public static String generateBusinessProcessView(ProcessModel pm){
+		public static String generateBusinessProcessView(ProcessModel pm, Node currentStep){
 			Node startNode = ModelEngine.getStartNode(pm);
 			
 			if( startNode != null ){
@@ -94,6 +130,10 @@ public class ModelEngine {
 					
 					//currentNode.getClass().getSimpleName()
 					if( !addedIds.contains(getCuttedID(currentNode.getId())) ){
+						if( currentStep != null && currentStep.getId().equals( currentNode.getId() ) ){
+							cssClass += " Selected";
+						}
+						
 						out += "<span id=\"Act_"+ getCuttedID(currentNode.getId()) +"\" style=\"left:"+currentNodeWrapper.left+"px;top:"+currentNodeWrapper.top+"px\" class=\""+cssClass+"\">" + getCuttedID(currentNode.getId()) + "</span>";
 						addedIds.add(getCuttedID(currentNode.getId()));
 					}

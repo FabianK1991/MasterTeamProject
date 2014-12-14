@@ -1,4 +1,4 @@
-@(ProcessModel: String, title: String)
+@(ProcessModel: String, title: String, workArea: Html)
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,8 @@
 	    		@Html(ProcessModel)
 	    	</div>
 	    </div>
-    	
-    	
+	    <div>
+	    	@workArea
+	    </div>
     </body>
 </html>
