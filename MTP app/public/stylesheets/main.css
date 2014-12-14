@@ -13,6 +13,8 @@ body{
 	background-color: #FFFFFF;
 	padding: 20px;
 	min-height: 700px;
+	position: relative;
+	top: -10px;
 }
 
 #navBar{
@@ -31,6 +33,30 @@ body{
 	float: left;
 }
 
+#workArea div:first-child {
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: 3px;
+	margin-bottom: 15px;
+	display: block;
+}
+
+#workArea div{
+	margin-bottom: 20px;
+	margin-left: 50px;
+	display: table-row;
+}
+
+#workArea span{
+	padding-top: 20px;
+	padding-right: 10px;
+	display: table-cell;
+}
+
+#workArea input{
+	display: table-cell;
+}
+
 #relatedDocumentsView{
 	border: 1px solid grey;
 	border-radius: 4px;
@@ -38,6 +64,13 @@ body{
 	width: 220px;
 	display: inline-block;
 	float: right;
+}
+
+#relatedDocumentsView div:first-child {
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: 3px;
+	margin-bottom: 15px;
 }
 
 #ProcessModelContainer{
