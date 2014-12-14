@@ -71,6 +71,13 @@ public class ModelEngine {
 	 		}
 	 	}
 	 	
+	 	/*
+	 	 * TODO: Implement
+	 	 */
+	 	public static Node getPreviousActivity(Node currentNode, ProcessModel pm){
+	 		return null;
+	 	}
+	 	
 	 	public static Node getNextActivity(Node currentNode){
 	 		List<Node> workingNodes = new ArrayList<Node>();
 	 		workingNodes.add(currentNode);

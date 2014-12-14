@@ -32,26 +32,33 @@ public class Application extends Controller
 	
 	public static Result test() {
 		String action = request().getQueryString("action");
+		
+		ProcessModel pm = null;
+		Node currentStep = null;
 		 
 		// Create new process instance
 		if( action != null && action.equals("create") && request().getQueryString("process") != null ){
 			session("process", request().getQueryString("process"));
 			
-			ProcessModel pm = Mapping.getProcessModel(session("process"));
-			Node startNode = ModelEngine.getNextActivity(ModelEngine.getStartNode(pm));
+			pm = Mapping.getProcessModel(session("process"));
+			currentStep = ModelEngine.getNextActivity(ModelEngine.getStartNode(pm));
 			
-			session("step", startNode.getId());
+			session("step", currentStep.getId());
+		}
+		// Assume we go a step ahead
+		else if( action != null && action.equals("back") ){
+			pm = Mapping.getProcessModel(session("process"));
+			currentStep = ModelEngine.getPreviousActivity(ModelEngine.getNodeById(session("step"), pm), pm);
 			
-			return ok(ModelEngine.generateCompleteView(pm, startNode));
+			session("step", currentStep.getId());
 		}
 		// Assume we go a step ahead
 		else if( session("process") != null ){
 			// Store Process Instance
 			//Cache.get(session.getId() + "-messages", ProcessInstance.class);
 			//Cache.set(session.getId() + "-messages", new ProcessInstance(pm));
-			
-			ProcessModel pm = Mapping.getProcessModel(session("process"));
-			Node currentStep = ModelEngine.getNextActivity(ModelEngine.getNodeById(session("step"), pm));
+			pm = Mapping.getProcessModel(session("process"));
+			currentStep = ModelEngine.getNextActivity(ModelEngine.getNodeById(session("step"), pm));
 			
 			// End reached
 			if( currentStep == null ){
@@ -60,11 +67,20 @@ public class Application extends Controller
 			
 			// Update session variable
 			session("step", currentStep.getId());
-			
-			return ok(ModelEngine.generateCompleteView(pm, currentStep));
 		}
 		
-		// Render example process
-		return ok(ModelEngine.generateCompleteView(mtp.Offline.getMailProcessModel(), ModelEngine.getNextActivity(ModelEngine.getStartNode(mtp.Offline.getMailProcessModel()))));
+		
+		// Start new example process if no action is given
+		if( pm == null ){
+			session("process", "http://mail.process/process1");
+			
+			pm = Mapping.getProcessModel(session("process"));
+			currentStep = ModelEngine.getNextActivity(ModelEngine.getStartNode(pm));
+			
+			session("step", currentStep.getId());
+		}
+		
+		// Render
+		return ok(ModelEngine.generateCompleteView(pm, currentStep));
 	}
 }
